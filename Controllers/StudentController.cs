@@ -24,67 +24,67 @@ public class StudentController : ControllerBase
         return await students.ToListAsync();
     }
 
-    // // GET: api/student/2
-    // [HttpGet("{id}")]
-    // public async Task<ActionResult<Student>> GetTodo(int id)
-    // {
-    //     // Find todo and related list
-    //     // SingleAsync() throws an exception if no todo is found (which is possible, depending on id)
-    //     // SingleOrDefaultAsync() is a safer choice here
-    //     var todo = await _context.Todos.Include(t => t.List).SingleOrDefaultAsync(t => t.Id == id);
+    // GET: api/student/2
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Student>> GetStudent(int id)
+    {
+        // Find todo and related list
+        // SingleAsync() throws an exception if no todo is found (which is possible, depending on id)
+        // SingleOrDefaultAsync() is a safer choice here
+        var student = await _context.Students.Include(t => t.Enrollments).SingleOrDefaultAsync(t => t.Id == id);
 
-    //     if (todo == null)
-    //         return NotFound();
+        if (student == null)
+            return NotFound();
 
-    //     return todo;
-    // }
+        return student;
+    }
 
-    // // POST: api/todo
-    // [HttpPost]
-    // public async Task<ActionResult<Todo>> PostTodo(Todo todo)
-    // {
-    //     _context.Todos.Add(todo);
-    //     await _context.SaveChangesAsync();
+    // POST: api/student
+    [HttpPost]
+    public async Task<ActionResult<Student>> PostStudent(Student student)
+    {
+        _context.Students.Add(student);
+        await _context.SaveChangesAsync();
 
-    //     return CreatedAtAction(nameof(GetTodo), new { id = todo.Id }, todo);
-    // }
+        return CreatedAtAction(nameof(GetStudent), new { id = student.Id }, student);
+    }
 
-    // // PUT: api/todo/2
-    // [HttpPut("{id}")]
-    // public async Task<IActionResult> PutTodo(int id, Todo todo)
-    // {
-    //     if (id != todo.Id)
-    //         return BadRequest();
+    // PUT: api/student/2
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutStudent(int id, Student student)
+    {
+        if (id != student.Id)
+            return BadRequest();
 
-    //     _context.Entry(todo).State = EntityState.Modified;
+        _context.Entry(student).State = EntityState.Modified;
 
-    //     try
-    //     {
-    //         await _context.SaveChangesAsync();
-    //     }
-    //     catch (DbUpdateConcurrencyException)
-    //     {
-    //         if (!_context.Todos.Any(m => m.Id == id))
-    //             return NotFound();
-    //         else
-    //             throw;
-    //     }
+        try
+        {
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!_context.Students.Any(m => m.Id == id))
+                return NotFound();
+            else
+                throw;
+        }
 
-    //     return NoContent();
-    // }
+        return NoContent();
+    }
 
-    // // DELETE: api/todo/2
-    // [HttpDelete("{id}")]
-    // public async Task<IActionResult> DeleteTodoItem(int id)
-    // {
-    //     var todo = await _context.Todos.FindAsync(id);
+    // DELETE: api/student/2
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteStudentItem(int id)
+    {
+        var student = await _context.Students.FindAsync(id);
 
-    //     if (todo == null)
-    //         return NotFound();
+        if (student == null)
+            return NotFound();
 
-    //     _context.Todos.Remove(todo);
-    //     await _context.SaveChangesAsync();
+        _context.Students.Remove(student);
+        await _context.SaveChangesAsync();
 
-    //     return NoContent();
-    // }
+        return NoContent();
+    }
 }
