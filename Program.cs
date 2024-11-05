@@ -15,20 +15,7 @@ builder.Services.AddSwaggerGen();
 // This will allow the application to interact with the database
 builder.Services.AddDbContext<UniversityContext>();
 
-var app = builder.Build();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<UniversityContext>();
-
-
-
-builder.Services.AddControllers()
-// Prevent circular references when serializing objects to JSON
-    .AddJsonOptions(x =>
-        x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles
-    );
-
-
+var app = builder.Build(); 
 
 
 // Configure the HTTP request pipeline.

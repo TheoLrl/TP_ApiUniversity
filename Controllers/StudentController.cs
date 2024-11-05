@@ -20,7 +20,7 @@ public class StudentController : ControllerBase
     public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
     {
         // Get students and related lists
-        var students = _context.Students.Include(t => t.Enrollments);
+        var students = _context.Students;
         return await students.ToListAsync();
     }
 
