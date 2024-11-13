@@ -7,4 +7,6 @@ public class Department
     public List<Course> Courses { get; set; }
 
     public int InstructorId { get; set; }
+
+    public Department(){}
 }

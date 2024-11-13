@@ -20,7 +20,6 @@ public class Course
         Enrollments = courseDTO.Enrollments;
         Department = courseDTO.Department;
         Instructors = courseDTO.Instructors;
-
     }
 
 }
