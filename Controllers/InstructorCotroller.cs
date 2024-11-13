@@ -43,4 +43,27 @@ public class InstructorController : ControllerBase
 
         return new InstructorDTO(instructor);
     }
+
+    [HttpPost("{instructorId}/courses")]
+    public async Task<IActionResult> AssignCoursesToInstructor(int instructorId, TaughtCourseDTO taughtCourseDTO)
+    {
+        var instructor = await _context.Instructors
+            .Include(i => i.Courses)
+            .FirstOrDefaultAsync(i => i.Id == instructorId);
+
+        if (instructor == null)
+        {
+            return NotFound();
+        }
+
+        var courses = await _context.Courses
+            .Where(c => taughtCourseDTO.CourseIds.Contains(c.Id))
+            .ToListAsync();
+
+        instructor.Courses.AddRange(courses);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
+
 }
