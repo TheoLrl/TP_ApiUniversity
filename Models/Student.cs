@@ -9,5 +9,13 @@ public class Student
     public List<Enrollment> Enrollments { get; set; } = new();
 
     // Default constructor
-    public Student() { }
+    public Student() {}
+    public Student(StudentDTO studentDTO)
+    {
+        Id = studentDTO.Id;
+        FirstName = studentDTO.FirstName;
+        LastName = studentDTO.LastName;
+        EnrollmentDate = studentDTO.EnrollmentDate;
+        
+    }
 }
