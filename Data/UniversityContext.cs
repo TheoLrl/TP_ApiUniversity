@@ -4,10 +4,14 @@ using ApiUniversity.Models;
 public class UniversityContext : DbContext
 {
   public DbSet<Student> Students { get; set; } = null!;
-   public DbSet<Enrollment> Enrollments  { get; set; } = null!;
-   public DbSet<Course> Courses  { get; set; } = null!;
+  public DbSet<Enrollment> Enrollments { get; set; } = null!;
+  public DbSet<Course> Courses { get; set; } = null!;
 
-//    public DbSet<Grade> Grades  { get; set; } = null!; PAS BESOIN 
+  public DbSet<Department> Departments { get; set; }
+  public DbSet<Instructor> Instructors { get; set; }
+
+
+  //    public DbSet<Grade> Grades  { get; set; } = null!; PAS BESOIN 
   public string DbPath { get; private set; }
 
 
