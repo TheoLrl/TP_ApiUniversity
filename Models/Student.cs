@@ -8,6 +8,9 @@ public class Student
     public DateTime EnrollmentDate { get; set; }
     public List<Enrollment> Enrollments { get; set; } = new();
 
+    //ajout 
+    public string Email { get; set; } = null!;
+
     // Default constructor
     public Student() {}
     public Student(StudentDTO studentDTO)
